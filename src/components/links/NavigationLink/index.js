@@ -1,5 +1,5 @@
-import {memo} from 'react';
-import {View, Text, Pressable} from 'react-native';
+import { memo } from 'react';
+import { View, Text, Pressable } from 'react-native';
 import FeatherIcons from 'react-native-vector-icons/Feather';
 import styles from './styles';
 
@@ -18,8 +18,9 @@ const NavigationLink = ({
   // Returning
   return (
     <Pressable
-      style={[styles.link, {backgroundColor: linkBackgroundColor}]}
-      onPress={onPress}>
+      style={[styles.link, { backgroundColor: linkBackgroundColor }]}
+      onPress={onPress}
+    >
       {/* Navigation icon & label */}
       <View style={styles.leftIconLabelWrapper}>
         <View
@@ -28,7 +29,8 @@ const NavigationLink = ({
             {
               backgroundColor: leftIconWrapperBackgroundColor,
             },
-          ]}>
+          ]}
+        >
           <FeatherIcons
             name={leftIconName}
             size={iconSize}
@@ -36,7 +38,7 @@ const NavigationLink = ({
           />
         </View>
 
-        <Text style={[styles.label, {color: labelColor}]}>{label}</Text>
+        <Text style={[styles.label, { color: labelColor }]}>{label}</Text>
       </View>
       <FeatherIcons name="chevron-right" size={iconSize} color={chevronColor} />
     </Pressable>

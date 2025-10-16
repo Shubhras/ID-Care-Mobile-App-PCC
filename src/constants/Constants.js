@@ -1,5 +1,5 @@
-import {scale} from 'react-native-size-matters';
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
+import { scale } from 'react-native-size-matters';
 
 // Declaring constants
 export const OPEN_SANS_BOLD = 'OpenSans-Bold';

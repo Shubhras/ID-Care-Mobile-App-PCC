@@ -1,7 +1,7 @@
-import { View, ImageBackground, StatusBar } from 'react-native';
+import { ImageBackground, StatusBar, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import styles from './styles';
- 
+
 // Functional component
 const Splash = () => {
   return (

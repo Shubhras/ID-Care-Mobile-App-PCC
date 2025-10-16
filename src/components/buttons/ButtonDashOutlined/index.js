@@ -1,5 +1,5 @@
-import {memo} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import { memo } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
 
 // Functional component
@@ -11,16 +11,17 @@ const ButtonDashOutlined = ({
   borderColor,
 }) => {
   return (
-    <TouchableOpacity style={[styles.button, {borderColor: borderColor}]}>
+    <TouchableOpacity style={[styles.button, { borderColor: borderColor }]}>
       <View style={styles.buttonIconLabelWrapper}>
         <View
           style={[
             styles.iconWrapper,
-            {backgroundColor: iconWrapperBackgroundColor},
-          ]}>
+            { backgroundColor: iconWrapperBackgroundColor },
+          ]}
+        >
           {icon}
         </View>
-        <Text style={[styles.label, {color: labelColor}]}>{label}</Text>
+        <Text style={[styles.label, { color: labelColor }]}>{label}</Text>
       </View>
     </TouchableOpacity>
   );

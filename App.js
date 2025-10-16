@@ -1,17 +1,20 @@
 //import liraries
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { StatusBar, StyleSheet } from 'react-native';
+import { LogBox, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import AppStyles from './AppStyles';
 import Routes from './src/navigators/Routes';
-import Splash from './src/screens/Splash';
-import Colors from './src/constants/Colors';
-import { Provider } from 'react-redux';
 import store, { persistor } from './src/redux/store/Store';
-import { PersistGate } from 'redux-persist/integration/react';
-
+import Splash from './src/screens/Splash';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
+LogBox.ignoreLogs([
+  'Animated: `useNativeDriver` was not specified. This is a required option and must be explicitly set to `true` or `false`',
+]);
 
 // create a component
 const App = () => {

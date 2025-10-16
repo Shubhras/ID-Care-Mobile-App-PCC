@@ -1,4 +1,3 @@
-
 const Colors = {
   orange: '#FB8500', // Orange
   white: '#FFFFFF', // White
@@ -16,11 +15,11 @@ const Colors = {
   bule: '#484B79', // Blue
   boysenberry: '#B22B57',
   textSecondary: '#828282',
-  textLowContrast: "#828282",
-  inputBackgroundColor: "#F7F7F7",
-  buttonBackgroundColor: "#7A7A7A",
-  bluishPurple: "#474a7f",
-  deepPurple: '#614375'
+  textLowContrast: '#828282',
+  inputBackgroundColor: '#F7F7F7',
+  buttonBackgroundColor: '#7A7A7A',
+  bluishPurple: '#474a7f',
+  deepPurple: '#614375',
 };
 
 // Exporting colors

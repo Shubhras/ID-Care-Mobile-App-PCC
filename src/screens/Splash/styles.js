@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {scale} from 'react-native-size-matters';
+import { StyleSheet } from 'react-native';
+import { scale } from 'react-native-size-matters';
 import Colors from '../../constants/Colors';
 import {
   FONT_SIZE_LG,
@@ -9,7 +9,6 @@ import {
   STANDARD_FLEX,
   STANDARD_SPACING,
 } from '../../constants/Constants';
-
 
 // Exporting style
 export default StyleSheet.create({

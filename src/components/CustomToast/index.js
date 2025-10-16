@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, Animated, View } from 'react-native';
-import { FONT_SIZE_MD, OPEN_SANS_MEDIUM, SCREEN_HEIGHT,STANDARD_SPACING } from '../../constants/Constants'
+import {
+  FONT_SIZE_MD,
+  OPEN_SANS_MEDIUM,
+  SCREEN_HEIGHT,
+  STANDARD_SPACING,
+} from '../../constants/Constants';
 import { scale } from 'react-native-size-matters';
+import { CustomText } from '../global/CustomComponents';
 
 const CustomToast = ({
   visible,
@@ -9,7 +15,6 @@ const CustomToast = ({
   onHide,
   backgroundColor,
   colorText,
-  
 }) => {
   const [bottom] = useState(new Animated.Value(-100));
 
@@ -39,7 +44,9 @@ const CustomToast = ({
 
   return (
     <View style={[styles.toast, { backgroundColor }]}>
-      <Text style={[styles.text, { color: colorText }]}>{message}</Text>
+      <CustomText style={[styles.text, { color: colorText }]}>
+        {message}
+      </CustomText>
     </View>
   );
 };
@@ -55,13 +62,12 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     bottom: SCREEN_HEIGHT * 0.1,
     backgroundColor: 'black',
-    zIndex: 1
+    zIndex: 1,
   },
   text: {
     fontFamily: OPEN_SANS_MEDIUM,
     fontSize: FONT_SIZE_MD,
-    textAlign: "center",
-
+    textAlign: 'center',
   },
 });
 

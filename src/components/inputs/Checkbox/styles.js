@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {STANDARD_CHECKBOX_SIZE} from '../../../config/Constants';
+import { StyleSheet } from 'react-native';
+import { STANDARD_CHECKBOX_SIZE } from '../../../config/Constants';
 
 // Exporting style
 export default StyleSheet.create({

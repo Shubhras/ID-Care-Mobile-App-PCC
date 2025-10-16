@@ -1,10 +1,10 @@
-import {memo} from 'react';
-import {Pressable} from 'react-native';
+import { memo } from 'react';
+import { Pressable } from 'react-native';
 import styles from './styles';
-import {scale} from 'react-native-size-matters';
+import { scale } from 'react-native-size-matters';
 
 // Functional component
-const ButtonCircled = ({height, icon, backgroundColor, onPress, opacity}) => {
+const ButtonCircled = ({ height, icon, backgroundColor, onPress, opacity }) => {
   return (
     <Pressable
       style={[
@@ -16,7 +16,8 @@ const ButtonCircled = ({height, icon, backgroundColor, onPress, opacity}) => {
           opacity: opacity,
         },
       ]}
-      onPress={onPress}>
+      onPress={onPress}
+    >
       {icon}
     </Pressable>
   );

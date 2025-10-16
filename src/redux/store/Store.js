@@ -6,7 +6,6 @@
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 // import usersSlices from '../slices/SessionUser';
 
-
 // const rootReducer = combineReducers({
 //   users: usersSlices,
 
@@ -34,8 +33,6 @@
 
 // export default store;
 
-
-
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -49,9 +46,9 @@ const rootReducer = combineReducers({
 
 // 2️ Configure Redux Persist
 const persistConfig = {
-  key: 'root',        // key for persisted state
+  key: 'root', // key for persisted state
   storage: AsyncStorage, // use AsyncStorage in React Native
-  whitelist: ['users'],  // only persist users slice (optional)
+  whitelist: ['users'], // only persist users slice (optional)
 };
 
 // 3️ Create persisted reducer

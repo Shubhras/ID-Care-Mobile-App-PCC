@@ -1,4 +1,6 @@
 import { StyleSheet } from 'react-native';
+import { scale } from 'react-native-size-matters';
+import Colors from '../../../constants/Colors';
 import {
   FONT_SIZE_MD,
   MONTSERRAT_SEMIBOLD,
@@ -10,8 +12,6 @@ import {
   STANDARD_FLEX,
   STANDARD_SPACING,
 } from '../../../constants/Constants';
-import { scale } from 'react-native-size-matters';
-import Colors from '../../../constants/Colors';
 
 // Exporting style
 export default StyleSheet.create({
@@ -53,7 +53,7 @@ export default StyleSheet.create({
   noResultsWrapper: {
     height: SCREEN_HEIGHT * 0.9,
     justifyContent: 'center',
-    alignItems: "center",
+    alignItems: 'center',
   },
   noResultsText: {
     textAlign: 'center',
@@ -65,10 +65,10 @@ export default StyleSheet.create({
     borderBottomColor: Colors.grey,
     height: scale(50),
     justifyContent: 'center',
-    marginHorizontal: SCREEN_WIDTH * 0.05
+    marginHorizontal: SCREEN_WIDTH * 0.05,
   },
   optionText: {
     fontFamily: OPEN_SANS_MEDIUM,
-    fontSize: FONT_SIZE_MD
-  }
+    fontSize: FONT_SIZE_MD,
+  },
 });

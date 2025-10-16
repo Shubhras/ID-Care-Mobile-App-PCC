@@ -1,13 +1,13 @@
-import {memo} from 'react';
-import {TouchableOpacity} from 'react-native';
+import { memo } from 'react';
+import { TouchableOpacity } from 'react-native';
 import styles from './styles';
-import {scale} from 'react-native-size-matters';
+import { scale } from 'react-native-size-matters';
 
 // Functional component
-const ButtonSquared = ({height, icon, backgroundColor,onPress}) => {
+const ButtonSquared = ({ height, icon, backgroundColor, onPress }) => {
   return (
     <TouchableOpacity
-    onPress={onPress}
+      onPress={onPress}
       style={[
         styles.button,
         {
@@ -15,7 +15,8 @@ const ButtonSquared = ({height, icon, backgroundColor,onPress}) => {
           backgroundColor: backgroundColor,
           borderRadius: height * 0.2,
         },
-      ]}>
+      ]}
+    >
       {icon}
     </TouchableOpacity>
   );

@@ -1,14 +1,11 @@
 // // Exporting
 // export default memo(TextInput);
 import { memo, useState } from 'react';
-import {
-  TextInput as RNTextInput,
-  View,
-  Text,
-} from 'react-native';
+import { TextInput as RNTextInput, View } from 'react-native';
 import styles from './styles';
 
 import Colors from '../../../constants/Colors';
+import { CustomText } from '../../global/CustomComponents';
 
 const TextInput = ({
   label,
@@ -52,7 +49,7 @@ const TextInput = ({
   return (
     <>
       {label && (
-        <Text
+        <CustomText
           style={[
             styles.label,
             {
@@ -60,16 +57,18 @@ const TextInput = ({
               marginTop: marginTop,
               //  textAlign: language == 'SA' ? 'right' : 'left'
             },
-          ]}>
+          ]}
+        >
           {label}
-        </Text>
+        </CustomText>
       )}
       <View
         style={[
           styles.textInputWrapper,
           textInputWrapper,
           { backgroundColor: backgroundColor },
-        ]}>
+        ]}
+      >
         {leftIcon && (
           <View style={[styles.textInputIconWrapper, leftIconstyle]}>
             {leftIcon}
@@ -77,14 +76,17 @@ const TextInput = ({
         )}
         {countrycode && (
           <View style={styles.textCountryWrapper}>
-            <Text style={[styles.Countrylabel, { color: countrylabelColor }]}>
+            <CustomText
+              style={[styles.Countrylabel, { color: countrylabelColor }]}
+            >
               {countrycode}
-            </Text>
+            </CustomText>
           </View>
         )}
 
         <RNTextInput
           ref={refText}
+          allowFontScaling={false}
           placeholder={placeholder}
           style={{
             ...{
@@ -119,26 +121,27 @@ const TextInput = ({
         {rightIcon && (
           <View style={styles.textInputIconWrapperRight}>{rightIcon}</View>
         )}
-
       </View>
       <View style={styles.errorContainer}>
         {errors && (
-          <Text
+          <CustomText
             style={[
               styles.errorText,
               // {textAlign: language == 'SA' ? 'right' : 'left'},
-            ]}>
+            ]}
+          >
             {errors}
-          </Text>
+          </CustomText>
         )}
         {errorsSuccess && (
-          <Text
+          <CustomText
             style={[
               styles.errorTextSucess,
               // {textAlign: language == 'SA' ? 'right' : 'left'},
-            ]}>
+            ]}
+          >
             {errorsSuccess}
-          </Text>
+          </CustomText>
         )}
       </View>
     </>

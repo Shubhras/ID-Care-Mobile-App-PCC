@@ -1,10 +1,10 @@
-import {StyleSheet} from 'react-native';
-import {scale} from 'react-native-size-matters';
+import { StyleSheet } from 'react-native';
+import { scale } from 'react-native-size-matters';
 import {
-  STANDARD_BUTTON_HEIGHT,
-  OPEN_SANS_MEDIUM,
   FONT_SIZE_LG,
-} from '../../../constants/Constants'
+  OPEN_SANS_MEDIUM,
+  STANDARD_BUTTON_HEIGHT,
+} from '../../../constants/Constants';
 
 // Exporting style
 export default StyleSheet.create({

@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {scale} from 'react-native-size-matters';
+import { StyleSheet } from 'react-native';
+import { scale } from 'react-native-size-matters';
 import {
   OPEN_SANS_MEDIUM,
   FONT_SIZE_SM,
