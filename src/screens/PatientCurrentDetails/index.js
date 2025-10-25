@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Image, Pressable, ScrollView, View } from 'react-native';
 import { scale } from 'react-native-size-matters';
 import { CustomText } from '../../components/global/CustomComponents';
@@ -10,6 +10,8 @@ import EmailModles from '../../components/modls/EmailModles';
 import PatientPickerModal from '../../components/modls/PatientPickerModal';
 import Colors from '../../constants/Colors';
 import styles from './styles';
+import { useSelector } from 'react-redux';
+import { GetInitialDx, GetInitialRx } from '../../auth/auth';
 const data = [
   { id: 1, name: 'Ashbrook Care and Rehabilitation Center' },
   { id: 2, name: 'Bloomingdale Rehab Center' },
@@ -34,7 +36,8 @@ const data = [
 
 const PatientCurrentDetails = ({ navigation, route }) => {
   const { detail } = route.params;
-  console.log('detail333', detail);
+  const user = useSelector(state => state?.users?.users);
+  console.log('useruseruseruseruser', user);
 
   const [selected, setSelected] = useState(null);
   const [additionalModalVisible, setAdditionalModalVisible] = useState(false);
@@ -46,7 +49,8 @@ const PatientCurrentDetails = ({ navigation, route }) => {
   const [selectedInitialRx, setSelectedInitialRx] = useState(null);
   const [count, setCount] = useState(3); // default value
   const [mailModalVisible, setMailModalVisible] = useState(false);
-
+  const [initialDx, setInitialDx] = useState([]);
+  const [initialRx, setInitialRx] = useState([]);
   const increment = () => setCount(prev => prev + 1);
   const decrement = () => {
     if (count > 0) setCount(prev => prev - 1);
@@ -57,7 +61,45 @@ const PatientCurrentDetails = ({ navigation, route }) => {
     { key: 'neutral', label: 'Neutral' },
     { key: 'disagree', label: 'Disagree' },
   ];
+  useEffect(() => {
+    getInitialDx();
+    getInitialRx();
+  }, []);
+  const getInitialDx = async () => {
+    let formdata = new FormData();
+    formdata.append('login_session_key', user.login_session_key);
+    try {
+      const response = await GetInitialDx(formdata);
+      console.log('GetInitialDx', response);
 
+      if (response.status === 1) {
+        const records = response.response;
+        setInitialDx(records);
+      } else {
+        console.log('Get InitialDx Details  failed:', response.message);
+      }
+    } catch (error) {
+      console.log('Get InitialDx Details error:', error);
+    }
+  };
+
+  const getInitialRx = async () => {
+    let formdata = new FormData();
+    formdata.append('login_session_key', user.login_session_key);
+    try {
+      const response = await GetInitialRx(formdata);
+      console.log('GetInitialRx', response);
+
+      if (response.status === 1) {
+        const records = response.response;
+        setInitialRx(records);
+      } else {
+        console.log('Get Initial Rx Details  failed:', response.message);
+      }
+    } catch (error) {
+      console.log('Get InitialRx Details error:', error);
+    }
+  };
   return (
     <CustomSafeAreaView
       statusBarBackgroundColor="transparent"
@@ -75,7 +117,7 @@ const PatientCurrentDetails = ({ navigation, route }) => {
             right={
               <Image
                 style={styles.iconImageHome}
-                source={require('../../assets/images/Home _white.png')}
+                source={require('../../assets/images/Home_white.png')}
               />
             }
             onRightPress={() => {
@@ -181,17 +223,19 @@ const PatientCurrentDetails = ({ navigation, route }) => {
               MD Steward Recommendation
             </CustomText>
             {/* <View style={styles.editButton}> */}
-            <Pressable
-              style={styles.editButton}
-              onPress={() => setEdit(prev => !prev)}
-            >
-              <CustomText style={styles.labelText}>
-                {isEdit ? 'Edit' : 'Cancel'}
-              </CustomText>
-            </Pressable>
+            {user?.login_role === 'Md Steward' && (
+              <Pressable
+                style={styles.editButton}
+                onPress={() => setEdit(prev => !prev)}
+              >
+                <CustomText style={styles.labelText}>
+                  {isEdit ? 'Edit' : 'Cancel'}
+                </CustomText>
+              </Pressable>
+            )}
             {/* </View> */}
           </View>
-          {!isEdit && (
+          {!isEdit && user?.login_role === 'Md Steward' && (
             <View style={styles.editRow}>
               <CustomText style={styles.newTtitle}>Current Dx</CustomText>
               <View
@@ -390,7 +434,7 @@ const PatientCurrentDetails = ({ navigation, route }) => {
         </ScrollView>
         <PatientPickerModal
           visible={additionalModalVisible}
-          data={data}
+          data={initialDx}
           onClose={() => setAdditionalModalVisible(false)}
           onSelectPatient={patient => {
             setSelectedAdditional(patient);
@@ -400,7 +444,7 @@ const PatientCurrentDetails = ({ navigation, route }) => {
         {/* Initial Dx Modal */}
         <PatientPickerModal
           visible={initialDxModalVisible}
-          data={data}
+          data={initialRx}
           onClose={() => setInitialDxModalVisible(false)}
           onSelectPatient={patient => {
             setSelectedInitialDx(patient);

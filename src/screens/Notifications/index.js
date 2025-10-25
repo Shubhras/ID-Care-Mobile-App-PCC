@@ -78,7 +78,7 @@ const Notifications = ({ navigation }) => {
             rightLogout={
               <Image
                 style={styles.iconImageLogout}
-                source={require('../../assets/images/Home _white.png')}
+                source={require('../../assets/images/Home_white.png')}
               />
             }
           />

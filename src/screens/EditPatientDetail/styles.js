@@ -1,17 +1,20 @@
 import { StyleSheet } from 'react-native';
-import { scale } from 'react-native-size-matters';
-import Colors from '../../constants/Colors';
 import {
+  FONT_SIZE_LG,
   FONT_SIZE_MD,
+  FONT_SIZE_SM,
+  OPEN_SANS_BOLD,
   OPEN_SANS_MEDIUM,
   OPEN_SANS_REGULAR,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
   STANDARD_BORDER_RADIUS,
-  STANDARD_FLEX,
   STANDARD_SPACING,
+  STANDARD_FLEX,
   STANDARD_TEXT_INPUT_HEIGHT,
 } from '../../constants/Constants';
+import { scale } from 'react-native-size-matters';
+import Colors from '../../constants/Colors';
 
 // Exporting style
 export default StyleSheet.create({
@@ -88,7 +91,7 @@ export default StyleSheet.create({
   valueTextDot: {
     fontFamily: OPEN_SANS_REGULAR,
     fontSize: FONT_SIZE_MD,
-    color: Colors.textLowContrast,
+    color: Colors.boysenberry,
     width: '30%',
   },
   numberDotText: {

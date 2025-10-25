@@ -45,7 +45,6 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: SCREEN_WIDTH * 0.06,
-
     bottom: -40, // Positioned to overlap the main content view
   },
   textInput: {
@@ -60,7 +59,8 @@ export default StyleSheet.create({
     paddingHorizontal: STANDARD_SPACING * 2,
   },
   flatListContent: {
-    paddingBottom: STANDARD_SPACING * 4,
+    paddingBottom: STANDARD_SPACING * 20,
+    // backgroundColor: 'red',
   },
   // Table Header Row Style
   tableHeaderRow: {

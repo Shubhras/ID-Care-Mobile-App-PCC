@@ -21,7 +21,7 @@ const PatientPickerModal = ({ visible, onClose, onSelectPatient, data }) => {
     index => {
       const selected = patientData[index];
       setSelectedPatientId(selected.id);
-      onSelectPatient(selected?.name);
+      onSelectPatient(selected);
     },
     [patientData, onSelectPatient],
   );

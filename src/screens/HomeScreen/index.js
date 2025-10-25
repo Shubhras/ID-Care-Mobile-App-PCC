@@ -144,7 +144,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <CustomSafeAreaView
-      statusBarBackgroundColor="transparent"
+      // statusBarBackgroundColor="transparent"
       barStyle="dark-content"
     >
       <View

@@ -1,7 +1,7 @@
-import axios from "axios";
-import { API_URL } from "../../env";
+import axios from 'axios';
+import { API_URL } from '../../env';
 
-export const LoginAPI = async (formdata) => {
+export const LoginAPI = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -9,7 +9,7 @@ export const LoginAPI = async (formdata) => {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-      data: formdata
+      data: formdata,
     };
     console.log('configconfig', config);
 
@@ -17,12 +17,12 @@ export const LoginAPI = async (formdata) => {
       .request(config)
       .then(response => {
         resolve(response.data);
-        console.log('responsedata',response.data)
+        console.log('responsedata', response.data);
       })
       .catch(error => {
         if (error.response) {
           reject(error.response.data);
-          console.log('response1111error',error)
+          console.log('response1111error', error);
         } else if (error.request) {
           reject(error);
         } else {
@@ -32,7 +32,7 @@ export const LoginAPI = async (formdata) => {
   });
 };
 
-export const LogoutAPI = async (formdata) => {
+export const LogoutAPI = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -64,9 +64,7 @@ export const LogoutAPI = async (formdata) => {
   });
 };
 
-
-
-export const Notification = async (formdata) => {
+export const Notification = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -98,8 +96,7 @@ export const Notification = async (formdata) => {
   });
 };
 
-
-export const CareUnit = async (formdata) => {
+export const CareUnit = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -131,8 +128,7 @@ export const CareUnit = async (formdata) => {
   });
 };
 
-
-export const PatiensList = async (formdata) => {
+export const PatiensList = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -164,9 +160,7 @@ export const PatiensList = async (formdata) => {
   });
 };
 
- 
-
-export const patientListExisting = async (formdata) => {
+export const patientListExisting = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -198,12 +192,7 @@ export const patientListExisting = async (formdata) => {
   });
 };
 
-
-
-
-
-
-export const patientDetails = async (formdata) => {
+export const patientDetails = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -235,9 +224,7 @@ export const patientDetails = async (formdata) => {
   });
 };
 
-
-
-export const addPatient = async (formdata) => {
+export const addPatient = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -269,7 +256,7 @@ export const addPatient = async (formdata) => {
   });
 };
 
-export const notificationDelete = async (formdata) => {
+export const notificationDelete = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -301,9 +288,7 @@ export const notificationDelete = async (formdata) => {
   });
 };
 
-
-
-export const GetInitialDx = async (formdata) => {
+export const GetInitialDx = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -333,9 +318,7 @@ export const GetInitialDx = async (formdata) => {
   });
 };
 
-
-
-export const GetInitialRx = async (formdata) => {
+export const GetInitialRx = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -365,8 +348,7 @@ export const GetInitialRx = async (formdata) => {
   });
 };
 
-
-export const Getorganism = async (formdata) => {
+export const Getorganism = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -396,8 +378,7 @@ export const Getorganism = async (formdata) => {
   });
 };
 
-
-export const GetPrecautions = async (formdata) => {
+export const GetPrecautions = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -427,10 +408,7 @@ export const GetPrecautions = async (formdata) => {
   });
 };
 
-
-
-
-export const GetDoctors = async (formdata) => {
+export const GetDoctors = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -460,10 +438,7 @@ export const GetDoctors = async (formdata) => {
   });
 };
 
-
-
-
-export const GetmdSteward = async (formdata) => {
+export const GetmdSteward = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -493,10 +468,7 @@ export const GetmdSteward = async (formdata) => {
   });
 };
 
-
-
-
-export const GetCultureSource= async (formdata) => {
+export const GetCultureSource = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -526,11 +498,7 @@ export const GetCultureSource= async (formdata) => {
   });
 };
 
-
-
-
-
-export const GetUpdatePatientsDetails= async (formdata) => {
+export const GetUpdatePatientsDetails = async formdata => {
   return new Promise((resolve, reject) => {
     const config = {
       method: 'post',
@@ -559,9 +527,3 @@ export const GetUpdatePatientsDetails= async (formdata) => {
       });
   });
 };
-
-
-
-
-
-

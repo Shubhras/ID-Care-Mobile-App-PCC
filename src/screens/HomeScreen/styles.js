@@ -161,8 +161,9 @@ export default StyleSheet.create({
   bottomWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: SCREEN_HEIGHT * 0.04,
+    // marginTop: SCREEN_HEIGHT * 0.04,
     paddingHorizontal: SCREEN_WIDTH * 0.1,
+    paddingVertical: SCREEN_WIDTH * 0.04,
   },
   textBottom: {
     fontFamily: OPEN_SANS_REGULAR,

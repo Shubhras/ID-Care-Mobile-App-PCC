@@ -404,7 +404,7 @@ const EditPatientDetail = ({ navigation, route }) => {
           rightLogout={
             <Image
               style={styles.iconImageHome}
-              source={require('../../assets/images/Home _white.png')}
+              source={require('../../assets/images/Home_white.png')}
             />
           }
         />
