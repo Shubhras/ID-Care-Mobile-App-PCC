@@ -61,6 +61,7 @@ const Login = ({ navigation }) => {
         console.log('Login Failed:', response.message);
       }
     } catch (error) {
+       setShowToast(true);
       console.log('response error', error);
     }
   };
@@ -164,7 +165,7 @@ const Login = ({ navigation }) => {
                   />
                 </View>
 
-                <View style={styles.changeLoginWrapper}>
+                {/* <View style={styles.changeLoginWrapper}>
                   <CustomText style={styles.changeText}>
                     You are trying to login as MD Steward.
                   </CustomText>
@@ -175,7 +176,7 @@ const Login = ({ navigation }) => {
                     underline
                     fontSize={scale(10)}
                   />
-                </View>
+                </View> */}
 
                 <View style={styles.buttonWrapper}>
                   <Button

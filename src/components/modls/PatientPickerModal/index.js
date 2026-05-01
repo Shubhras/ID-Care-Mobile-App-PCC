@@ -7,6 +7,7 @@ import { CustomText, CustomTextInput } from '../../global/CustomComponents';
 import CustomSafeAreaView from '../../global/CustomSafeAreaView';
 import Icons from '../../Icons/Icons';
 import styles from './styles';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const PatientPickerModal = ({ visible, onClose, onSelectPatient, data }) => {
   const [search, setSearch] = useState('');
@@ -41,9 +42,8 @@ const PatientPickerModal = ({ visible, onClose, onSelectPatient, data }) => {
       visible={visible}
       onRequestClose={onClose}
     >
-      <CustomSafeAreaView
-        statusBarBackgroundColor="Abxtransparent"
-        barStyle="dark-content"
+      <SafeAreaView
+       style={{ flex: 1, backgroundColor: Colors.transparent }}
       >
         <View style={[styles.mainWrapper, { backgroundColor: Colors.white }]}>
           {/* Search Bar */}
@@ -113,7 +113,7 @@ const PatientPickerModal = ({ visible, onClose, onSelectPatient, data }) => {
             }
           />
         </View>
-      </CustomSafeAreaView>
+      </SafeAreaView>
     </Modal>
   );
 };

@@ -1,12 +1,12 @@
 import { memo } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Pressable } from 'react-native';
 import styles from './styles';
 import { scale } from 'react-native-size-matters';
 
 // Functional component
 const ButtonSquared = ({ height, icon, backgroundColor, onPress }) => {
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={onPress}
       style={[
         styles.button,
@@ -18,7 +18,7 @@ const ButtonSquared = ({ height, icon, backgroundColor, onPress }) => {
       ]}
     >
       {icon}
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
