@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { scale } from 'react-native-size-matters';
+import { moderateScale, scale } from 'react-native-size-matters';
 import Colors from '../../constants/Colors';
 import {
   FONT_SIZE_MD,
@@ -8,19 +8,30 @@ import {
   OPEN_SANS_REGULAR,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
-  STANDARD_BORDER_RADIUS,
   STANDARD_FLEX,
   STANDARD_SPACING,
+  STANDARD_TEXT_INPUT_HEIGHT
 } from '../../constants/Constants';
 
 // Exporting style
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   mainWrapper: {
     flex: STANDARD_FLEX,
     backgroundColor: Colors.white,
+  },
+  searchbarWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    margin: STANDARD_SPACING * 3,
+    borderWidth: 1,
+    borderColor: Colors.error,
+  },
+  searchbarTextInput: {
+    width: SCREEN_WIDTH * 0.75,
+    height: STANDARD_TEXT_INPUT_HEIGHT,
+    borderRadius: STANDARD_TEXT_INPUT_HEIGHT * 0.2,
+    paddingLeft: STANDARD_SPACING * 3,
   },
   iconImageHome: {
     width: scale(20),
@@ -35,24 +46,21 @@ export default StyleSheet.create({
     borderBottomLeftRadius: scale(18),
   },
   textInputWrapper: {
-    // width: SCREEN_WIDTH * 0.9,
-    height: scale(40),
-    // alignSelf: 'center',
-    paddingHorizontal: STANDARD_SPACING * 2,
-    borderRadius: STANDARD_BORDER_RADIUS,
-    backgroundColor: Colors.inputBackgroundColor,
-    marginTop: scale(5),
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: SCREEN_WIDTH * 0.06,
-    bottom: -40, // Positioned to overlap the main content view
+    marginTop: STANDARD_SPACING * 2,
+    marginHorizontal: STANDARD_SPACING * 3,
+    marginBottom: STANDARD_SPACING * 3,
+    // borderWidth: 1,
   },
   textInput: {
+    borderWidth: 1,
     fontFamily: OPEN_SANS_MEDIUM,
     fontSize: FONT_SIZE_MD,
     color: Colors.textLowContrast,
   },
-
+  leftIconStyle: {
+    width: moderateScale(30),
+    paddingLeft: STANDARD_SPACING,
+  },
   // --- New Styles for the Patient List ---
   listContainer: {
     paddingTop: scale(25),
@@ -116,5 +124,12 @@ export default StyleSheet.create({
     color: Colors.boysenberry,
     textDecorationLine: 'underline',
     width: SCREEN_WIDTH * 0.2,
+  },
+  listViewItemCardComponentWrapper: {
+    marginBottom: STANDARD_SPACING * 3,
+    marginHorizontal: STANDARD_SPACING * 3,
+  },
+  listContainerWrapper: {
+    paddingBottom: STANDARD_SPACING * 5,
   },
 });

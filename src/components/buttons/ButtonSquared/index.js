@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Pressable } from 'react-native';
 import styles from './styles';
-import { scale } from 'react-native-size-matters';
+import { moderateScale, scale } from 'react-native-size-matters';
 
 // Functional component
 const ButtonSquared = ({ height, icon, backgroundColor, onPress }) => {
@@ -11,9 +11,9 @@ const ButtonSquared = ({ height, icon, backgroundColor, onPress }) => {
       style={[
         styles.button,
         {
-          height: scale(height),
-          backgroundColor: backgroundColor,
-          borderRadius: height * 0.2,
+          height: moderateScale(height),
+          backgroundColor: backgroundColor, 
+          borderRadius: moderateScale(height) * 0.2,
         },
       ]}
     >

@@ -410,6 +410,8 @@ const PatientCurrentDetails = ({ navigation, route }) => {
               <TextInput
                 textInputWrapper={styles.textInputWrapper}
                 placeholder={'Enter Comment'}
+                placeholderTextColor={Colors.textLowContrast}
+                textInputValueColor={Colors.textHighContrast}
                 backgroundColor={Colors.inputBackgroundColor}
                 styleInput={styles.textInput}
               />

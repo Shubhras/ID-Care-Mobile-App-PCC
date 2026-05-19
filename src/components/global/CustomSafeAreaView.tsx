@@ -1,13 +1,15 @@
 import React, { FC, ReactNode, useCallback } from 'react';
-import { StatusBar, StyleSheet, View, ViewStyle } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Platform, StatusBar, StyleSheet, View, ViewStyle } from 'react-native';
+import { SafeAreaView, Edge } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
+import Colors from '../../constants/Colors';
 
 interface CustomSafeAreaViewProps {
   statusBarBackgroundColor?: string;
   barStyle?: 'default' | 'light-content' | 'dark-content';
   children: ReactNode;
   style?: ViewStyle;
+  edges?: Edge[];
 }
 
 /**
@@ -16,22 +18,31 @@ interface CustomSafeAreaViewProps {
  * - Optional props for backgroundColor, barStyle, and container style
  */
 const CustomSafeAreaView: FC<CustomSafeAreaViewProps> = ({
-  statusBarBackgroundColor = '#ffffff',
+  statusBarBackgroundColor = Colors.white,
   barStyle = 'dark-content',
+  edges,
   children,
   style,
 }) => {
   // Update StatusBar when screen is focused
   useFocusEffect(
     useCallback(() => {
-      StatusBar.setBackgroundColor(statusBarBackgroundColor, true);
+      if (Platform.OS === 'android') {
+        StatusBar.setBackgroundColor(statusBarBackgroundColor, true);
+      }
       StatusBar.setBarStyle(barStyle, true);
-    }, [statusBarBackgroundColor, barStyle])
+    }, [statusBarBackgroundColor, barStyle]),
   );
 
   return (
     <SafeAreaView
-      style={[styles.container, { backgroundColor: statusBarBackgroundColor }, style]}>
+      edges={edges ? edges : ['top']}
+      style={[
+        styles.container,
+        { backgroundColor: statusBarBackgroundColor },
+        style,
+      ]}
+    >
       <StatusBar
         backgroundColor={statusBarBackgroundColor}
         barStyle={barStyle}
@@ -51,4 +62,3 @@ const styles = StyleSheet.create({
 });
 
 export default CustomSafeAreaView;
- 

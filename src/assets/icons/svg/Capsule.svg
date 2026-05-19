@@ -1,0 +1,7 @@
+<svg fill="none" width="24px" height="24px" viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg">
+    <path id="primary"
+        d="M19.54,19.54a5,5,0,0,0,0-7.08l-8-8a5,5,0,0,0-7.08,7.08l8,8a5,5,0,0,0,7.08,0Z"
+        style="fill: #86D4ED;"></path>
+    <path id="secondary" d="M8.46,15.54l-4-4a5,5,0,0,1,7.08-7.08l4,4Z" style="fill: #EB665F;"></path>
+</svg>

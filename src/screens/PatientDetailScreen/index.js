@@ -1,409 +1,240 @@
-import { useEffect, useState } from 'react';
-import { Image, Pressable, ScrollView, View } from 'react-native'; // Added ScrollView, ActivityIndicator
-import { scale } from 'react-native-size-matters';
-import { useSelector } from 'react-redux';
-import { patientDetails } from '../../auth/auth';
-import ButtonSquared from '../../components/buttons/ButtonSquared';
+import { Pressable, ScrollView, View } from 'react-native'; // Added Text, FlatList, TouchableOpacity
+import PatientProfileCard from '../../components/cards/PatientProfileCard';
+import ContactItemCard from '../../components/cards/ContactItemCard';
 import { CustomText } from '../../components/global/CustomComponents';
 import CustomSafeAreaView from '../../components/global/CustomSafeAreaView';
 import Header from '../../components/Header/Header';
 import Icons from '../../components/Icons/Icons';
+import Link from '../../components/links/Link';
 import Colors from '../../constants/Colors';
-import { STANDARD_SPACING } from '../../constants/Constants';
+import {
+  FONT_SIZE_XXS,
+  STANDARD_VECTOR_ICON_SIZE,
+} from '../../constants/Constants';
+import ButtonDashOutlined from '../../components/buttons/ButtonDashOutlined';
+import FeatherIcons from 'react-native-vector-icons/Feather';
 import styles from './styles';
+import { moderateScale } from 'react-native-size-matters';
+import { RFValue } from 'react-native-responsive-fontsize';
+import PatientProfileItemCard from '../../components/cards/PatientProfileItemCard';
+import { Images } from '../../constants/images';
 
-const PatientsDetailScreen = ({ navigation, route }) => {
-  const user = useSelector(state => state?.users?.users);
-  const { care_unit_id, patient_id } = route.params;
-  console.log('patient_id666', patient_id);
-  const [patientDetail, setPatientDetail] = useState(null);
-  const [facility, setFacility] = useState('');
+const contactList = [
+  {
+    id: 1,
+    name: 'MARIETTA HORNE',
+    phone: '(908) 709-1398',
+    email: 'horne.family33@gmail.com',
+    relation: 'Wife',
+    role: 'Responsible Party',
+  },
+  {
+    id: 2,
+    name: 'WILL JR HORNE',
+    phone: '(908) 709-1398',
+    email: 'WHORNE89@GMAIL.COM',
+    relation: 'Son',
+    role: 'xyz',
+  },
+  {
+    id: 3,
+    name: 'WILLIAM HORNE',
+    phone: '(908) 709-1398',
+    email: 'WILLIAM.HORNE@GMAIL.COM',
+    relation: 'Self',
+    role: 'xyz',
+  },
+];
 
-  const getPatientDetails = async () => {
-    let formdata = new FormData();
-    formdata.append('login_session_key', user.login_session_key);
-    if (care_unit_id) {
-      formdata.append('care_unit_id', care_unit_id);
-    }
-    if (patient_id) {
-      formdata.append('patient_id', patient_id);
-    }
-    try {
-      const response = await patientDetails(formdata);
-      console.log('patientDetails', response.response);
+const patientProfileData = [
+  {
+    id: 1,
+    title: 'Medical Record #',
+    value: '21061',
+    image: Images.medicalRecord,
+  },
+  {
+    id: 2,
+    title: 'Medicare Number',
+    value: 'N/A',
+    image: Images.medicare,
+  },
+  {
+    id: 3,
+    title: 'Social Beneficiary ID',
+    value: 'N/A',
+    image: Images.socialBeneficiaryId,
+  },
+  {
+    id: 4,
+    title: 'Occupation',
+    value: 'N/A',
+    image: Images.occupation,
+  },
+  {
+    id: 5,
+    title: 'Religion',
+    value: 'N/A',
+    image: Images.religion,
+  },
+  {
+    id: 6,
+    title: 'Race',
+    value: 'White',
+    image: Images.race,
+  },
+  {
+    id: 7,
+    title: 'Phone',
+    value: '(908) 709-1398',
+    image: Images.phone,
+  },
+  {
+    id: 8,
+    title: 'Address',
+    value: '42 PRINCETON RD, Cranford, NJ - 07016, United States',
+    image: Images.address,
+  },
+];
 
-      if (response.status === 1) {
-        const records = response.response;
-        setPatientDetail(records);
-        setFacility(records.symptom_onset);
-      } else {
-        console.log('Get patient Details  failed:', response.message);
-      }
-    } catch (error) {
-      console.log('Get patient Details error:', error);
-    }
-  };
-
-  // const AddPatient = async () => {
-
-  //     let formdata = new FormData();
-  //     formdata.append('login_session_key', user.login_session_key);
-  //     if (care_unit_id) {
-  //         formdata.append('care_unit_id', care_unit_id);
-  //     }
-  //     if (patient_id) {
-  //         formdata.append("patient_id", patient_id);
-  //     }
-  //     try {
-  //         const response = await addPatient(formdata);
-  //         console.log('AddPatient', response);
-
-  //         if (response.status === 1) {
-  //             const records = response.response;
-  //             // setPatientHistory(records)
-
-  //         } else {
-  //             console.log('Add Patient Details  failed:', response.message);
-  //         }
-  //     } catch (error) {
-  //         console.log('Add Patient Details error:', error);
-  //     }
-  // };
-  useEffect(() => {
-    getPatientDetails();
-    // AddPatient()
-  }, []);
-
+const PatientDetailScreen = ({ navigation }) => {
   return (
     <CustomSafeAreaView
-      statusBarBackgroundColor="transparent"
       barStyle="dark-content"
+      statusBarBackgroundColor={Colors.secondary}
     >
-      <View style={styles.mainWrapper}>
+      <View style={[styles.mainWrapper, { backgroundColor: Colors.secondary }]}>
         <Header
           back
-          title={'Patient Detail'}
-          iconColor={Colors.textLowContrast} // Assuming Header title should be white for contrast
-          backgroundColor={Colors.boysenberry} // Set Header background for consistency
+          title={'Patient Details'}
+          iconColor={Colors.textHighContrast}
+          headerBg={Colors.secondary}
           onRightLogout={() => {
             navigation.navigate('HomeScreen');
           }}
-          // Updated the right icon to be the 'Home' icon as per previous screen pattern
           rightLogout={
-            <Image
-              style={styles.iconImageHome}
-              source={require('../../assets/images/Home_white.png')}
+            <Icons
+              iconType={'Feather'}
+              name={'more-vertical'}
+              size={STANDARD_VECTOR_ICON_SIZE}
+              color={Colors.textHighContrast}
             />
           }
         />
-        <View style={styles.editButtonWrapper}>
-          <ButtonSquared
-            onPress={() => {
-              navigation.navigate('EditPatientDetail', {
-                care_unit_id: care_unit_id,
-                patient_id: patient_id,
-              });
-            }}
-            height={scale(40)}
-            backgroundColor={Colors.boysenberry}
-            icon={
-              <Icons
-                name="pen"
-                iconType="FontAwesome5"
-                color={Colors.white}
-                size={scale(20)}
-              />
-            }
-          />
-        </View>
         <ScrollView
-          style={styles.scrollView}
+          bounces={false}
+          overScrollMode="never"
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.mainScrollView}
         >
-          <View style={styles.listContainer}>
-            <View style={styles.rowWrapper}>
-              <CustomText style={styles.titleText}>Patient's ID :</CustomText>
-              <CustomText style={styles.valueText}>
-                {patientDetail?.patient_id}
-              </CustomText>
-            </View>
+          <View style={styles.profileCardWrapper}>
+            <PatientProfileCard
+              profileImage={null}
+              firstName={'WILLIAM'}
+              lastName={'HORNE'}
+              status={'Discharged'}
+              gender={'Male'}
+              dob={'09/14/1938'}
+              admissionDate={'03/12/2026 09:56 PM'}
+              citizenship={'N/A'}
+              maritalStatus={'Married'}
+              language={'English'}
+            />
+          </View>
 
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>Infection Onset</CustomText>
-            </View>
-            <View style={styles.rowStatusWrapper}>
-              <View
-                style={[
-                  styles.statusButton,
-                  {
-                    backgroundColor:
-                      facility == 'Hospital'
-                        ? Colors.boysenberry
-                        : Colors.inputBackgroundColor,
-                  },
-                ]}
-              >
-                <CustomText
-                  style={[
-                    styles.titleText,
-                    {
-                      color:
-                        facility == 'Hospital'
-                          ? Colors.white
-                          : Colors.textLowContrast,
-                    },
-                  ]}
-                >
-                  Hospital/CAI
-                </CustomText>
-              </View>
-              <View
-                style={[
-                  styles.statusButtonRight,
-                  {
-                    backgroundColor:
-                      facility == 'Facility'
-                        ? Colors.boysenberry
-                        : Colors.inputBackgroundColor,
-                  },
-                ]}
-              >
-                <CustomText
-                  style={[
-                    styles.titleText,
-                    {
-                      color:
-                        facility == 'Facility'
-                          ? Colors.white
-                          : Colors.textLowContrast,
-                    },
-                  ]}
-                >
-                  Facility/HAI
-                </CustomText>
-              </View>
-            </View>
-
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>Care Unit Name</CustomText>
-            </View>
-            <View style={styles.rowWrapper}>
-              <CustomText style={styles.valueText}>
-                {patientDetail?.care_unit_name}
-              </CustomText>
-            </View>
-
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>Initial Dx</CustomText>
-            </View>
-            <View style={styles.rowWrapper}>
-              <CustomText style={styles.valueText}>
-                {patientDetail?.initial_dx_name}
-              </CustomText>
-            </View>
-
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>Initial Rx</CustomText>
-            </View>
-            <View style={styles.rowWrapper}>
-              <CustomText style={styles.valueText}>
-                {patientDetail?.initial_rx_name}
-              </CustomText>
-            </View>
-
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>Initial DOT</CustomText>
-            </View>
-            <View style={styles.rowWrapper}>
-              <CustomText style={styles.valueText}>
-                {patientDetail?.initial_dot}
-              </CustomText>
-            </View>
-
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>Abx Checklist</CustomText>
-            </View>
-            <View style={styles.rowWrapper}>
-              <CustomText style={styles.valueText}>
-                {patientDetail?.infection_surveillance_checklist}
-              </CustomText>
-            </View>
-
-            {patientDetail?.criteria_met !== null && (
-              <View
-                style={[styles.rowWrapper, { marginTop: STANDARD_SPACING * 4 }]}
-              >
-                <CustomText style={styles.hedingText}>
-                  Criteria Met :{' '}
-                </CustomText>
-                <View style={{ flexDirection: 'row', columnGap: scale(5) }}>
-                  <View style={{ flexDirection: 'row', columnGap: scale(5) }}>
-                    <Icons
-                      name={
-                        patientDetail?.criteria_met == 'Yes'
-                          ? 'check-circle'
-                          : 'circle-thin'
-                      }
-                      size={24}
-                      color={Colors.deepPurple}
-                      iconType="FontAwesome"
-                    />
-                    <CustomText
-                      style={[
-                        styles.valueText,
-                        { color: Colors.textLowContrast },
-                      ]}
-                    >
-                      Yes
-                    </CustomText>
-                  </View>
-                  <View style={{ flexDirection: 'row', columnGap: scale(5) }}>
-                    <Icons
-                      name={
-                        patientDetail?.criteria_met == 'No'
-                          ? 'check-circle'
-                          : 'circle-thin'
-                      }
-                      size={24}
-                      color={Colors.deepPurple}
-                      iconType="FontAwesome"
-                    />
-                    <CustomText
-                      style={[
-                        styles.valueText,
-                        { color: Colors.textLowContrast },
-                      ]}
-                    >
-                      No
-                    </CustomText>
-                  </View>
-                </View>
-              </View>
-            )}
-
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>Organism</CustomText>
-            </View>
-            <View style={styles.rowWrapper}>
-              <CustomText style={styles.valueText}>
-                {patientDetail?.organism}
-              </CustomText>
-            </View>
-
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>Precautions</CustomText>
-            </View>
-            <View style={styles.rowWrapper}>
-              <CustomText style={styles.valueText}>
-                {patientDetail?.precautions}
-              </CustomText>
-            </View>
-
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>Culture Source</CustomText>
-            </View>
-            <View style={styles.rowWrapper}>
-              <CustomText style={styles.valueText}>
-                {patientDetail?.culture_source}
-              </CustomText>
-            </View>
-
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>Provider MD</CustomText>
-            </View>
-            <View style={styles.rowWrapper}>
-              <CustomText style={styles.valueText}>
-                AA Doctor Costanza
-              </CustomText>
-            </View>
-
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>MD Steward</CustomText>
-            </View>
-            <View style={styles.rowWrapper}>
-              <CustomText style={styles.valueText}>
-                {patientDetail?.doctor_name}
-              </CustomText>
-            </View>
-
-            <View style={styles.hedingWrapper}>
-              <CustomText style={styles.hedingText}>
-                Date of Starting ABX
-              </CustomText>
-            </View>
-            <View
-              style={[
-                styles.rowWrapper,
-                { marginBottom: STANDARD_SPACING * 1.5 },
-              ]}
+          <View style={styles.sectionTitleAndLinkWrapper}>
+            <CustomText
+              style={[styles.sectionTitle, { color: Colors.textHighContrast }]}
             >
-              <CustomText style={styles.valueText}>
-                {patientDetail?.date_of_start_abx}
-              </CustomText>
+              Contacts
+            </CustomText>
+            <Link
+              label="View All"
+              labelColor={Colors.boysenberry}
+              // onPress={() => navigation.navigate('Grid View Products')}
+            />
+          </View>
+          <View style={styles.contactCardWrapper}>
+            {contactList.map(item => {
+              return (
+                <ContactItemCard
+                  key={item.id}
+                  itemName={item.name}
+                  itemNameColor={Colors.textHighContrast}
+                  itemNumber={item.phone}
+                  itemNumberColor={Colors.textHighContrast}
+                  itemEmail={item.email}
+                  itemEmailColor={Colors.textHighContrast}
+                  itemRelation={item.relation}
+                  itemRelationColor={Colors.boysenberry}
+                  relationBackgroundColor={Colors.lightPurple}
+                  itemRole={item.role}
+                  itemRoleColor={Colors.textHighContrast}
+                />
+              );
+            })}
+            <View style={styles.addButtonComponentWrapper}>
+              <ButtonDashOutlined
+                icon={
+                  <FeatherIcons
+                    name="plus-circle"
+                    size={moderateScale(18)}
+                    color={Colors.boysenberry}
+                  />
+                }
+                buttonHeight={moderateScale(40)}
+                backgroundColor={Colors.lightPurple}
+                label="Add Contact"
+                borderColor={Colors.boysenberry}
+                labelColor={Colors.boysenberry}
+                fontSize={RFValue(8.5)}
+              />
             </View>
-            <View
-              style={[
-                styles.rowWrapper,
-                { marginBottom: STANDARD_SPACING * 1.5 },
-              ]}
-            >
-              <CustomText style={styles.hedingText}>
-                MD Steward Consult
-              </CustomText>
-              {patientDetail?.md_stayward_consult == 'Yes' && (
-                <CustomText style={[styles.valueText, { color: 'green' }]}>
-                  {patientDetail?.md_stayward_consult}
-                </CustomText>
-              )}
-              {patientDetail?.md_stayward_consult == 'No' && (
-                <CustomText style={styles.valueText}>
-                  {patientDetail?.md_stayward_consult}
-                </CustomText>
-              )}
-            </View>
+          </View>
 
-            <View
-              style={[
-                styles.rowWrapper,
-                { marginBottom: STANDARD_SPACING * 1.5 },
-              ]}
+          <View style={styles.sectionTitleWrapper}>
+            <CustomText
+              style={[styles.sectionTitle, { color: Colors.textHighContrast }]}
             >
-              <CustomText style={styles.hedingText}>
-                MD Steward Response
-              </CustomText>
-              {patientDetail?.md_stayward_response == 'Agree' && (
-                <CustomText style={[styles.valueText, { color: 'green' }]}>
-                  {patientDetail?.md_stayward_response}
-                </CustomText>
-              )}
-              {patientDetail?.md_stayward_response == 'NoResponse' && (
-                <CustomText style={[styles.valueText, { color: 'blue' }]}>
-                  {patientDetail?.md_stayward_response}
-                </CustomText>
-              )}
-              {patientDetail?.md_stayward_response == 'Disagree' && (
-                <CustomText style={[styles.valueText, { color: 'red' }]}>
-                  {patientDetail?.md_stayward_response}
-                </CustomText>
-              )}
-              {patientDetail?.md_stayward_response == 'Modify' && (
-                <CustomText style={[styles.valueText, { color: 'orange' }]}>
-                  {patientDetail?.md_stayward_response}
-                </CustomText>
-              )}
-            </View>
-            <Pressable
-              style={styles.buttonWrapper}
+              Patient Profile
+            </CustomText>
+          </View>
+
+          <View style={styles.patientProfileWrapper}>
+            {patientProfileData.map((item, index) => {
+              return (
+                <PatientProfileItemCard
+                  key={item.id}
+                  title={item.title}
+                  value={item.value}
+                  image={item.image}
+                  titleColor={Colors.textHighContrast}
+                  valueColor={Colors.textHighContrast}
+                  isLastItem={index === patientProfileData.length - 1}
+                />
+              );
+            })}
+          </View>
+
+          <View style={styles.viewAllDetailsButtonWrapper}>
+            <ButtonDashOutlined
+              icon={
+                <FeatherIcons
+                  name="arrow-right-circle"
+                  size={moderateScale(20)}
+                  color={Colors.boysenberry}
+                />
+              }
+              buttonHeight={moderateScale(48)}
+              backgroundColor={Colors.lightPurple}
+              label="View All Details"
+              borderColor={Colors.boysenberry}
+              labelColor={Colors.boysenberry}
+              fontSize={RFValue(10)}
               onPress={() => {
-                navigation.navigate('PatientCurrentDetails', {
-                  detail: patientDetail,
-                });
+                navigation.navigate('TopTabNavigator');
               }}
-            >
-              <CustomText style={[styles.hedingText, { color: Colors.white }]}>
-                MD Steward Recommendations
-              </CustomText>
-            </Pressable>
+            />
           </View>
         </ScrollView>
       </View>
@@ -411,4 +242,4 @@ const PatientsDetailScreen = ({ navigation, route }) => {
   );
 };
 
-export default PatientsDetailScreen;
+export default PatientDetailScreen;

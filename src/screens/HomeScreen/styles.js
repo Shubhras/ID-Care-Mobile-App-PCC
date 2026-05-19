@@ -1,173 +1,236 @@
 import { StyleSheet } from 'react-native';
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { scale } from 'react-native-size-matters';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { moderateScale } from 'react-native-size-matters';
 import Colors from '../../constants/Colors';
 import {
-  FONT_SIZE_LG,
-  FONT_SIZE_MD,
   FONT_SIZE_SM,
   FONT_SIZE_XS,
+  FONT_SIZE_XXS,
   OPEN_SANS_MEDIUM,
   OPEN_SANS_REGULAR,
-  SCREEN_HEIGHT,
-  SCREEN_WIDTH,
+  OPEN_SANS_SEMIBOLD,
   STANDARD_BORDER_RADIUS,
-  STANDARD_CATEGORY_IMAGE_WRAPPER_SIZE,
+  STANDARD_BORDER_WIDTH,
   STANDARD_FLEX,
-  STANDARD_SPACING,
+  STANDARD_SPACING
 } from '../../constants/Constants';
 
 // Exporting style
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   mainWrapper: {
     flex: STANDARD_FLEX,
   },
-  cardContainer: {
-    height: hp('80%'),
-    borderBottomLeftRadius: STANDARD_BORDER_RADIUS * 3,
-    borderBottomRightRadius: STANDARD_BORDER_RADIUS * 3,
+  scrollViewWrapper: {
+    flexGrow: STANDARD_FLEX,
+    paddingBottom: STANDARD_SPACING * 3,
   },
-  iconImage: {
-    tintColor: Colors.boysenberry,
-    width: scale(18),
-    height: scale(20),
-    resizeMode: 'contain',
-  },
-  iconImageLogout: {
-    tintColor: Colors.boysenberry,
-    width: scale(20),
-    height: scale(23),
-    resizeMode: 'contain',
-    marginLeft: scale(18),
-  },
-  buttonWrapper: {
-    flexDirection: 'row',
-    rowGap: STANDARD_SPACING * 10,
-  },
-  notificatonDot: {
-    position: 'absolute',
-    zIndex: 1,
-    height: scale(20),
-    width: scale(20),
-    backgroundColor: Colors.boysenberry,
-    alignItems: 'center',
-    borderRadius: scale(20),
-    top: -11,
-    right: -14.4,
-  },
-  notificatonText: {
-    fontFamily: OPEN_SANS_MEDIUM,
-    fontSize: FONT_SIZE_XS,
-    color: Colors.white,
-  },
-  mailText: {
-    fontFamily: OPEN_SANS_MEDIUM,
-    fontSize: FONT_SIZE_SM,
-    textAlign: 'center',
-    color: Colors.textLowContrast,
-  },
-
-  logoWrapper: {
-    alignSelf: 'center',
-    alignItems: 'center',
-    height: STANDARD_CATEGORY_IMAGE_WRAPPER_SIZE * 1.5,
-    width: SCREEN_WIDTH * 1,
-    marginVertical: STANDARD_SPACING * 3,
-  },
-  logoImage: {
-    height: '100%',
-    width: '75%',
-    resizeMode: 'contain',
-  },
-  listTitle: {
-    // textAlign: 'center',
-    fontFamily: OPEN_SANS_MEDIUM,
-    fontSize: FONT_SIZE_MD,
-    color: Colors.textLowContrast,
-  },
-  CareUnitButton: {
-    // width: SCREEN_WIDTH * 0.9,
-    height: scale(40),
-    // alignSelf: 'center',
-    paddingHorizontal: STANDARD_SPACING * 2,
-    borderRadius: STANDARD_BORDER_RADIUS,
-    backgroundColor: Colors.inputBackgroundColor,
-    marginTop: scale(5),
+  header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: SCREEN_WIDTH * 0.06,
+    justifyContent: 'space-between',
+    margin: STANDARD_SPACING * 3,
   },
-  careUnitButtonText: {
-    fontFamily: OPEN_SANS_MEDIUM,
-    fontSize: FONT_SIZE_MD,
-    color: Colors.textLowContrast,
-    width: SCREEN_WIDTH * 0.8,
-  },
-  icon: {
-    position: 'absolute',
-    right: 10,
-    top: 3,
-  },
-  linkView: {
-    // width: SCREEN_WIDTH * 0.9,
-    marginHorizontal: SCREEN_WIDTH * 0.06,
-
-    // alignSelf: 'center',
-    alignItems: 'flex-end',
-    paddingVertical: scale(10),
-    borderBottomWidth: scale(1),
-    borderColor: Colors.boysenberry,
-    marginBottom: scale(8),
-  },
-  linkText: {
-    textDecorationLine: 'underline',
-    fontFamily: OPEN_SANS_MEDIUM,
+  welcome: {
     fontSize: FONT_SIZE_SM,
+    fontFamily: OPEN_SANS_SEMIBOLD,
+    color: Colors.textHighContrast,
+  },
+  user: {
+    fontSize: RFValue(16),
+    fontFamily: OPEN_SANS_SEMIBOLD,
+    color: Colors.boysenberry,
+    textTransform: 'capitalize'
+  },
+  email: {
+    fontSize: FONT_SIZE_XXS,
+    fontFamily: OPEN_SANS_REGULAR,
+    color: Colors.textLowContrast,
+    marginTop: STANDARD_SPACING * 0.5,
+  },
+  headerIcons: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: STANDARD_SPACING * 2,
+  },
+  hero: {
+    flexDirection: 'row',
+    paddingHorizontal: STANDARD_SPACING * 3,
+    alignItems: 'center',
+  },
+  heroTitle: {
+    fontSize: FONT_SIZE_SM,
+    fontFamily: OPEN_SANS_MEDIUM,
+    color: Colors.textHighContrast,
+  },
+  heroHighlight: {
+    fontSize: FONT_SIZE_SM,
+    fontFamily: OPEN_SANS_SEMIBOLD,
     color: Colors.boysenberry,
   },
-  textView: {
-    // width:'90%',
-    marginHorizontal: SCREEN_WIDTH * 0.06,
-    // alignSelf: 'center',
-    marginBottom: scale(5),
+  heroSub: {
+    fontSize: FONT_SIZE_XXS,
+    fontFamily: OPEN_SANS_REGULAR,
+    color: Colors.textLowContrast,
+    marginTop: STANDARD_SPACING * 0.5,
   },
-  textInputWrapper: {
-    // width: SCREEN_WIDTH * 0.9,
-    marginHorizontal: SCREEN_WIDTH * 0.06,
-
-    height: scale(40),
-    // alignSelf: 'center',
-    paddingHorizontal: STANDARD_SPACING * 2,
-    borderRadius: STANDARD_BORDER_RADIUS,
-    backgroundColor: Colors.inputBackgroundColor,
-    marginTop: scale(5),
+  heroImageWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: moderateScale(200),
+  },
+  heroImage: {
+    width: moderateScale(200),
+    height: moderateScale(120),
+  },
+  card: {
+    minHeight: moderateScale(120),
+    backgroundColor: Colors.white,
+    margin: STANDARD_SPACING * 3,
+    padding: STANDARD_SPACING * 3,
+    borderRadius: STANDARD_BORDER_RADIUS * 2,
+    shadowColor: '#000000',
+    shadowOffset: { width: moderateScale(0), height: moderateScale(0) },
+    shadowOpacity: 0.1,
+    shadowRadius: moderateScale(5),
+    elevation: moderateScale(7.5),
+  },
+  headerRow: {
+    flexDirection: 'row',
+    marginBottom: STANDARD_SPACING * 4,
+  },
+  CardDetailsWrapper: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+    marginLeft: STANDARD_SPACING * 3,
+  },
+  cardTitle: {
+    fontSize: FONT_SIZE_XS,
+    fontFamily: OPEN_SANS_SEMIBOLD,
+    color: Colors.textHighContrast,
+  },
+  cardDesc: {
+    flexShrink: 1,
+    fontSize: FONT_SIZE_XXS,
+    fontFamily: OPEN_SANS_REGULAR,
+    color: Colors.textLowContrast,
+    marginTop: 4,
+  },
+  dropdown: {
     flexDirection: 'row',
     alignItems: 'center',
+    width: '100%',
+    height: 'auto',
+    minHeight: moderateScale(40),
+    borderWidth: STANDARD_BORDER_WIDTH * 1.2,
+    borderColor: Colors.boysenberry,
+    borderRadius: STANDARD_BORDER_RADIUS * 1.5,
+    paddingVertical: STANDARD_SPACING * 1.5,
+    paddingHorizontal: STANDARD_SPACING * 2.5,
+    // marginBottom: STANDARD_SPACING
+  },
+  dropdownText: {
+    fontSize: FONT_SIZE_XS,
+    fontFamily: OPEN_SANS_SEMIBOLD,
+    color: Colors.textHighContrast,
+  },
+  patientsListButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'flex-end',
+    height: moderateScale(35),
+    paddingHorizontal: moderateScale(15),
+    gap: STANDARD_SPACING,
+    borderWidth: STANDARD_BORDER_WIDTH * 1.2,
+    borderColor: Colors.darkPurple,
+    borderRadius: STANDARD_BORDER_RADIUS * 1.5,
+    backgroundColor: Colors.lightPurple + '60',
+  },
+  patientsListButtonLable: {
+    color: Colors.boysenberry,
+    fontFamily: OPEN_SANS_SEMIBOLD,
+    fontSize: FONT_SIZE_XXS,
+  },
+  horizontalDividerComponentWrapper: {
+    flex: 1,
+    marginVertical: STANDARD_SPACING * 3,
+  },
+   searchCardWrapper: {
+    minHeight: moderateScale(150),
+    backgroundColor: Colors.white,
+    marginHorizontal: STANDARD_SPACING * 3,
+    padding: STANDARD_SPACING * 3,
+    borderRadius: STANDARD_BORDER_RADIUS * 2,
+    shadowColor: '#000000',
+    shadowOffset: { width: moderateScale(0), height: moderateScale(0) },
+    shadowOpacity: 0.1,
+    shadowRadius: moderateScale(5),
+    elevation: moderateScale(7.5),
+  },
+  textInputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: moderateScale(40),
+    borderRadius: STANDARD_BORDER_RADIUS * 1.5,
+    marginBottom: STANDARD_SPACING * 3,
   },
   textInput: {
     fontFamily: OPEN_SANS_MEDIUM,
-    fontSize: FONT_SIZE_MD,
-    color: Colors.textLowContrast,
+    fontSize: FONT_SIZE_XS,
+    color: Colors.textHighContrast,
   },
-  button: {
-    marginTop: scale(10),
-    // width: SCREEN_WIDTH * 0.9,
-    marginHorizontal: SCREEN_WIDTH * 0.06,
-    // alignSelf: 'center'
+  searchTextInputIconStyl:{
+    width: moderateScale(30),
+    paddingLeft: STANDARD_SPACING,
   },
-  bottomWrapper: {
+  searchButton: {
+    height: moderateScale(40),
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: STANDARD_BORDER_RADIUS * 1.5,
+    paddingHorizontal: moderateScale(15),
+  },
+  searchButtonLable: {
+    fontFamily: OPEN_SANS_MEDIUM,
+    fontSize: FONT_SIZE_SM,
+  },
+  registerWrapper:{
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // marginTop: SCREEN_HEIGHT * 0.04,
-    paddingHorizontal: SCREEN_WIDTH * 0.1,
-    paddingVertical: SCREEN_WIDTH * 0.04,
+    alignItems: 'center',
+    margin: STANDARD_SPACING * 3,
+    backgroundColor: Colors.boysenberry,
+    borderRadius: STANDARD_BORDER_RADIUS * 1.5,
+    padding: STANDARD_SPACING * 2,
   },
-  textBottom: {
+  registerContainer:{
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  plusIconWrapper:{
+    position: 'absolute',
+    padding: STANDARD_SPACING * 0.05,
+    marginTop: STANDARD_SPACING * 3, 
+    marginLeft: STANDARD_SPACING * 4.8,
+    borderRadius: STANDARD_BORDER_RADIUS * 3,
+    borderWidth: STANDARD_BORDER_WIDTH,
+    borderColor: Colors.white
+  },
+  registerDetailsWrapper:{
+    flex: 1,
+    justifyContent: 'space-evenly',
+    marginLeft: STANDARD_SPACING * 3,
+    marginRight: STANDARD_SPACING * 3,
+  },
+  registerTitle: {
+    color: Colors.white,
+    fontSize: FONT_SIZE_XS,
+    fontFamily: OPEN_SANS_SEMIBOLD,
+  },
+  registerDesc: {
+    color: Colors.white,
+    fontSize: FONT_SIZE_XXS,
     fontFamily: OPEN_SANS_REGULAR,
-    fontSize: FONT_SIZE_LG,
-    color: Colors.buttonBackgroundColor,
   },
 });

@@ -1,12 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { scale } from 'react-native-size-matters';
+import { moderateScale, scale } from 'react-native-size-matters';
 import Feather from 'react-native-vector-icons/Feather';
 import Colors from '../../constants/Colors';
 import { OPEN_SANS_BOLD, SCREEN_WIDTH } from '../../constants/Constants';
 import Icons from '../Icons/Icons';
 import { CustomText } from '../global/CustomComponents';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 const IconSize = 24;
 
@@ -63,7 +64,7 @@ const Header = ({
           <Icons
             iconType={'Ionicons'}
             name="arrow-back-outline"
-            size={scale(25)}
+            size={moderateScale(25)}
             color={iconColor}
           />
         </TouchableOpacity>
@@ -80,7 +81,7 @@ const Header = ({
           styles.rightView,
           {
             width: rightText ? SCREEN_WIDTH * 0.18 : SCREEN_WIDTH * 0.1,
-            gap: scale(10),
+            gap: moderateScale(10),
           },
         ]}
       >
@@ -99,7 +100,7 @@ const Header = ({
             <Icons
               iconType={rightIconTypeHeart}
               name={rightHeart}
-              size={scale(23)}
+              size={moderateScale(23)}
               color={iconColorHeart}
             />
           </TouchableOpacity>
@@ -120,7 +121,7 @@ const Header = ({
                 {
                   color: iconColor,
                   textAlign: titleAlight,
-                  fontSize: scale(14),
+                  fontSize: RFValue(14),
                 },
               ]}
             >
@@ -145,7 +146,7 @@ const Header = ({
           {
             color: iconColor,
             textAlign: titleAlight,
-            fontSize: fontSize ? fontSize : scale(18),
+            fontSize: fontSize ? fontSize : RFValue(15),
           },
         ]}
       >
@@ -166,7 +167,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   header: {
-    height: scale(50),
+    height: moderateScale(50),
     elevation: 8,
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.black,
   },
   view: {
-    marginHorizontal: 16,
+    marginHorizontal: moderateScale(15),
     alignItems: 'center',
     flexDirection: 'row',
     width: SCREEN_WIDTH * 0.1,
@@ -182,13 +183,12 @@ const styles = StyleSheet.create({
   titleView: {
     // flex: 1,
     // maxWidth: scale(200),
-
     // alignSelf: 'center',
     alignItems: 'center',
     // textAlign: 'justify',
   },
   titletext: {
-    fontSize: scale(18),
+    fontSize: RFValue(18),
     fontFamily: OPEN_SANS_BOLD,
   },
   rightView: {
@@ -197,6 +197,6 @@ const styles = StyleSheet.create({
   rowView: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 10,
+    marginRight: RFValue(10),
   },
 });

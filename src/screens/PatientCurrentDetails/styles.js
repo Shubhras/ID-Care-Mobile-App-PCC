@@ -5,6 +5,7 @@ import Colors from '../../constants/Colors';
 import {
   FONT_SIZE_LG,
   FONT_SIZE_MD,
+  FONT_SIZE_XS,
   OPEN_SANS_BOLD,
   OPEN_SANS_MEDIUM,
   OPEN_SANS_REGULAR,
@@ -15,6 +16,7 @@ import {
   STANDARD_SPACING,
   STANDARD_TEXT_INPUT_HEIGHT,
 } from '../../constants/Constants';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 // Exporting style
 export default StyleSheet.create({
@@ -197,7 +199,7 @@ export default StyleSheet.create({
   },
   labelText: {
     fontFamily: OPEN_SANS_MEDIUM,
-    fontSize: scale(15),
+    fontSize: RFValue(15),
     color: Colors.white,
   },
   textInputWrapper: {
@@ -231,6 +233,6 @@ export default StyleSheet.create({
   },
   titleHeader: {
     fontFamily: OPEN_SANS_MEDIUM,
-    fontSize: scale(12),
+    fontSize: FONT_SIZE_XS,
   },
 });

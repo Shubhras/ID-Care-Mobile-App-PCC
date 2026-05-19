@@ -8,6 +8,7 @@ import PatientCurrentDetails from '../../screens/PatientCurrentDetails/index';
 import PatientDetailScreen from '../../screens/PatientDetailScreen/index';
 import PatientHistoryScreen from '../../screens/PatientHistoryScreen/index';
 import PatientsListScreen from '../../screens/PatientsListScreen/index';
+import TopTabNavigator from '../../navigators/TopTab/TopTabNavigator';
 import AuthStack from '../stacks/AuthStack';
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +58,11 @@ const Routes = () => {
       <Stack.Screen
         name="PatientCurrentDetails"
         component={PatientCurrentDetails}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="TopTabNavigator"
+        component={TopTabNavigator}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

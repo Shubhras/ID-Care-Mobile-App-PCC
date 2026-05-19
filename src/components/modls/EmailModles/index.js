@@ -52,16 +52,16 @@ const EmailModles = ({ visible, onClose }) => {
                 iconType={'Ionicons'}
                 name={'close'}
                 size={STANDARD_VECTOR_ICON_SIZE * 1.2}
-                color={Colors.black}
+                color={Colors.textHighContrast}
               />
             </Pressable>
           </View>
           <TextInput
             placeholder={'Enter patient email'}
             textInputWrapper={styles.textInputWrappe}
-            placeholderTextColor={Colors.greyDark}
+            placeholderTextColor={Colors.textLowContrast}
             backgroundColor={Colors.inputBackgroundColor}
-            textInputValueColor={Colors.black}
+            textInputValueColor={Colors.textHighContrast}
           />
           <View style={styles.textInputWrappe}>
             <Button

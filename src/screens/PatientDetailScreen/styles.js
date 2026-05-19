@@ -3,11 +3,15 @@ import { scale } from 'react-native-size-matters';
 import Colors from '../../constants/Colors';
 import {
   FONT_SIZE_MD,
+  FONT_SIZE_SM,
+  FONT_SIZE_XS,
   OPEN_SANS_MEDIUM,
   OPEN_SANS_REGULAR,
+  OPEN_SANS_SEMIBOLD,
   SCREEN_HEIGHT,
   SCREEN_WIDTH,
   STANDARD_BORDER_RADIUS,
+  STANDARD_BORDER_WIDTH,
   STANDARD_FLEX,
   STANDARD_SPACING,
   STANDARD_TEXT_INPUT_HEIGHT,
@@ -23,6 +27,61 @@ export default StyleSheet.create({
     flex: STANDARD_FLEX,
     backgroundColor: Colors.white,
   },
+  mainScrollView: {
+    flexGrow: STANDARD_FLEX,
+    paddingBottom: STANDARD_SPACING * 8,
+  },
+  profileCardWrapper: {
+    marginTop: STANDARD_SPACING,
+    marginHorizontal: STANDARD_SPACING * 3,
+  },
+  sectionTitleAndLinkWrapper: {
+    margin: STANDARD_SPACING * 3,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  sectionTitleWrapper: {
+    margin: STANDARD_SPACING * 3,
+  },
+  sectionTitle: {
+    fontFamily: OPEN_SANS_SEMIBOLD,
+    fontSize: FONT_SIZE_XS,
+  },
+  addButtonComponentWrapper: {
+    margin: STANDARD_SPACING * 3,
+  },
+  contactCardWrapper: {
+    marginHorizontal: STANDARD_SPACING * 3,
+    borderRadius: STANDARD_BORDER_RADIUS * 2.8,
+    backgroundColor: Colors.white,
+    borderWidth: STANDARD_BORDER_WIDTH,
+    borderColor: '#E7E7E7',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  patientProfileWrapper: {
+    marginHorizontal: STANDARD_SPACING * 3,
+    borderRadius: STANDARD_BORDER_RADIUS * 2.8,
+    backgroundColor: Colors.white,
+    borderWidth: STANDARD_BORDER_WIDTH,
+    borderColor: '#E7E7E7',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+
   iconImageHome: {
     tintColor: Colors.boysenberry,
     width: scale(20),
@@ -100,4 +159,7 @@ export default StyleSheet.create({
     borderTopRightRadius: STANDARD_BORDER_RADIUS,
     borderBottomRightRadius: STANDARD_BORDER_RADIUS,
   },
+  viewAllDetailsButtonWrapper:{
+    margin: STANDARD_SPACING * 4
+  }
 });

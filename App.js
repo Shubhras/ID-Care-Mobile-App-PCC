@@ -3,13 +3,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { LogBox, StyleSheet } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import AppStyles from './AppStyles';
 import Routes from './src/navigators/Routes';
 import store, { persistor } from './src/redux/store/Store';
 import Splash from './src/screens/Splash';
+import ToastProvider from './src/components/alerts/Toast/ToastManager';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 LogBox.ignoreLogs([
@@ -44,10 +45,11 @@ const App = () => {
           backgroundColor={Colors.white}
           barStyle="dark-content"
         /> */}
-            <SafeAreaView style={AppStyles.topSafeAreaView}>
-              <Routes />
-            </SafeAreaView>
-            <SafeAreaView style={AppStyles.bottomSafeAreaView} />
+            <SafeAreaProvider style={AppStyles.topSafeAreaView}>
+             <ToastProvider>
+               <Routes />
+             </ToastProvider>
+            </SafeAreaProvider>
           </NavigationContainer>
         </PersistGate>
       </Provider>

@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { scale } from 'react-native-size-matters';
+import { moderateScale } from 'react-native-size-matters';
 import {
-  OPEN_SANS_MEDIUM,
   FONT_SIZE_SM,
+  FONT_SIZE_XS,
+  OPEN_SANS_MEDIUM,
   STANDARD_BUTTON_HEIGHT,
   STANDARD_VECTOR_ICON_WRAPPER_SIZE,
-} from '../../../config/Constants';
+} from '../../../constants/Constants';
 
 // Exporting style
 export default StyleSheet.create({
@@ -17,17 +18,17 @@ export default StyleSheet.create({
     borderRadius: STANDARD_VECTOR_ICON_WRAPPER_SIZE * 0.5,
   },
   label: {
-    marginLeft: scale(10),
+    marginLeft: moderateScale(10),
     textTransform: 'capitalize',
     fontFamily: OPEN_SANS_MEDIUM,
-    fontSize: FONT_SIZE_SM,
+    fontSize: FONT_SIZE_XS,
   },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
     height: STANDARD_BUTTON_HEIGHT,
     borderRadius: STANDARD_BUTTON_HEIGHT * 0.2,
-    borderWidth: scale(1),
+    borderWidth: moderateScale(1),
     borderStyle: 'dashed',
   },
   buttonIconLabelWrapper: {

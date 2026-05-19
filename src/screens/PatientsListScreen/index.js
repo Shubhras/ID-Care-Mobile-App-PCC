@@ -1,157 +1,162 @@
-import { useEffect, useState } from 'react';
-import { FlatList, Image, TouchableOpacity, View } from 'react-native'; // Added Text, FlatList, TouchableOpacity
-import { scale } from 'react-native-size-matters';
-import { useSelector } from 'react-redux';
-import { PatiensList } from '../../auth/auth';
-import CustomToast from '../../components/CustomToast';
-import { CustomText } from '../../components/global/CustomComponents';
+//import liraries
+import React, { Component, useCallback, useMemo, useState } from 'react';
+import { View, Text, Image, FlatList } from 'react-native';
+import styles from './styles';
 import CustomSafeAreaView from '../../components/global/CustomSafeAreaView';
 import Header from '../../components/Header/Header';
-import Icons from '../../components/Icons/Icons';
-import TextInput from '../../components/inputs/TextInput';
 import Colors from '../../constants/Colors';
-import styles from './styles';
+import Icons from '../../components/Icons/Icons';
+import {
+  SCREEN_WIDTH,
+  STANDARD_BORDER_WIDTH,
+  STANDARD_SPACING,
+  STANDARD_VECTOR_ICON_SIZE,
+  isTablet,
+} from '../../constants/Constants';
+import TextInput from '../../components/inputs/TextInput';
+import { moderateScale } from 'react-native-size-matters';
+import PatientsItemCard from '../../components/cards/PatientsItemCard';
+import { CustomText } from '../../components/global/CustomComponents';
 
-const PatientsListScreen = ({ navigation, route }) => {
-  const { care_unit_id } = route.params;
-  const user = useSelector(state => state?.users?.users);
-  const [patientRecords, setPatientRecords] = useState([]);
-  const [showToast, setShowToast] = useState(false);
+const patientsData = [
+  {
+    id: '1',
+    name: 'CLAUDE WALLACE',
+    gender: 'Male',
+    dob: '11/11/1947',
+    mrn: '26124',
+    antibiotic: 'Azithromycin',
+    careUnit: 'Inglemoor Rehabilitation Care Center',
+    room: '145',
+  },
+  {
+    id: '2',
+    name: 'GERALD RICARDO',
+    gender: 'Male',
+    dob: '04/03/1930',
+    mrn: '26127',
+    antibiotic: 'Cephalexin',
+    careUnit: 'Inglemoor Rehabilitation Care Center',
+    room: '136',
+  },
+  {
+    id: '3',
+    name: 'PHYLLIS BROWNSTEIN',
+    gender: 'Female',
+    dob: '03/23/1931',
+    mrn: '26102',
+    antibiotic: 'Lorazepam',
+    careUnit: 'Inglemoor Rehabilitation Care Center',
+    room: '124',
+  },
+  {
+    id: '4',
+    name: 'JUDI ULL',
+    gender: 'Female',
+    dob: '10/08/1948',
+    mrn: '15205',
+    antibiotic: 'Lorazepam',
+    careUnit: 'Inglemoor Rehabilitation Care Center',
+    room: '126',
+  },
+  {
+    id: '5',
+    name: 'RUTH SHAPIRO',
+    gender: 'Female',
+    dob: '01/30/1948',
+    mrn: '26063',
+    antibiotic: 'Lorazepam',
+    careUnit: 'Inglemoor Rehabilitation Care Center',
+    room: '118',
+  },
+];
 
+const PatientsListScreen = ({ navigation }) => {
   const [search, setSearch] = useState('');
-  const [filteredRecords, setFilteredRecords] = useState([]);
 
-  useEffect(() => {
-    if (search === '') {
-      setFilteredRecords(patientRecords);
-    } else {
-      const text = search.toLowerCase();
-      const filtered = patientRecords.filter(item =>
-        item.patient_id.toLowerCase().includes(text),
-      );
-      setFilteredRecords(filtered);
-    }
-  }, [search, patientRecords]);
-
-  console.log('patientRecords', patientRecords);
-  const GetPatiensList = async () => {
-    let formdata = new FormData();
-    formdata.append('login_session_key', user.login_session_key);
-
-    if (user.login_role == 'Md Steward') {
-      formdata.append('md_steward_id', user.user_id);
-    }
-    if (care_unit_id) {
-      formdata.append('care_unit_id', care_unit_id);
-    }
-
-    try {
-      const response = await PatiensList(formdata);
-      console.log('Get PatiensList response:', response);
-
-      if (response.status === 1) {
-        const records = response.response;
-        setPatientRecords(records);
-      } else {
-        console.log('Get PatiensList failed:', response.message);
-        setShowToast(true);
-      }
-    } catch (error) {
-      console.log('Get PatiensList error:', error);
-    }
-  };
-  useEffect(() => {
-    GetPatiensList();
-  }, []);
-
-  // Function to render each item in the FlatList
-  const renderItem = ({ item }) => (
-    <View style={styles.patientRow}>
-      <CustomText style={styles.rowIdText}>{item?.patient_id}</CustomText>
-      <CustomText style={styles.rowDiagnosisText}>
-        {item?.initial_dx_name}
-      </CustomText>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('PatientHistoryScreen', {
-            care_unit_id: care_unit_id,
-            patient_id: item?.patient_id,
-          })
-        }
+  const renderItem = ({ item, index }) => {
+    return (
+      <View
+        key={`${item.id}-${index}`}
+        style={styles.listViewItemCardComponentWrapper}
       >
-        <CustomText style={styles.rowActionText}>View</CustomText>
-      </TouchableOpacity>
-    </View>
-  );
-
-  // Render the table header row
-  const ListHeaderComponent = () => (
-    <View style={styles.tableHeaderRow}>
-      <CustomText style={styles.headerIdText}>ID</CustomText>
-      <CustomText style={styles.headerDiagnosisText}>Diagnosis</CustomText>
-      <CustomText style={styles.headerrowActionText}>Action</CustomText>
-    </View>
-  );
+        <PatientsItemCard
+          cardBackgroundColor={Colors.white}
+          patientName={item.name}
+          patientNameColor={Colors.textHighContrast}
+          gender={item.gender}
+          genderColor={Colors.boysenberry}
+          dividerColor={Colors.darkPurple}
+          dob={item.dob}
+          mrn={item.mrn}
+          antibiotic={item.antibiotic}
+          careUnit={item.careUnit}
+          room={item.room}
+          infoTextColor={Colors.textLowContrast}
+          labelColor={Colors.textHighContrast}
+          buttonLabel={'View History'}
+          buttonBackgroundColor={Colors.boysenberry}
+          buttonLabelColor={Colors.white}
+          onViewHistory={() => navigation.navigate('PatientDetailScreen')}
+        />
+      </View>
+    );
+  };
 
   return (
     <CustomSafeAreaView
-      statusBarBackgroundColor="transparent"
-      barStyle="dark-content"
+      barStyle="light-content"
+      statusBarBackgroundColor={Colors.boysenberry}
     >
-      <View style={styles.mainWrapper}>
-        <View style={styles.headerWrapper}>
-          <Header
-            back
-            title={'Patients'}
-            iconColor={Colors.white}
-            onRightLogout={() => {
-              navigation.navigate('HomeScreen');
-            }}
-            rightLogout={
-              <Image
-                style={styles.iconImageHome}
-                source={require('../../assets/images/Home_white.png')}
-              />
-            }
-          />
+      <View style={[styles.mainWrapper, { backgroundColor: Colors.white }]}>
+        <Header
+          back
+          title={'Patients'}
+          iconColor={Colors.white}
+          headerBg={Colors.boysenberry}
+          onRightLogout={() => {
+            navigation.navigate('HomeScreen');
+          }}
+          rightLogout={
+            <Icons
+              iconType={'Ionicons'}
+              name={'home'}
+              size={STANDARD_VECTOR_ICON_SIZE}
+              color={Colors.white}
+            />
+          }
+        />
+        <View style={styles.textInputWrapper}>
           <TextInput
             placeholder={'Enter ID'}
-            textInputWrapper={styles.textInputWrapper}
-            backgroundColor={Colors.inputBackgroundColor}
-            keyboardType={'numeric'}
+            backgroundColor={Colors.white}
+            placeholderTextColor={Colors.textLowContrast}
+            textInputValueColor={Colors.textHighContrast}
+            // keyboardType={'numeric'}
             value={search}
             onChangeText={setSearch}
-            rightIcon={
+            leftIconstyle={styles.leftIconStyle}
+            leftIcon={
               <Icons
                 name="search"
                 iconType="Feather"
                 color={Colors.textLowContrast}
-                size={scale(20)}
+                size={moderateScale(20)}
               />
             }
-            styleInput={styles.textInput}
+            borderWidth={STANDARD_BORDER_WIDTH}
           />
         </View>
-        {/* Patient List Section */}
-        <View style={styles.listContainer}>
-          <FlatList
-            data={filteredRecords}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            ListHeaderComponent={ListHeaderComponent}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.flatListContent}
-          />
-        </View>
+
+        <FlatList
+          bounces={false}
+          overScrollMode="never"
+          data={patientsData}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.listContainerWrapper}
+        />
       </View>
-      <CustomToast
-        colorText={Colors?.white}
-        colorIcon={Colors?.black}
-        backgroundColor={Colors?.black}
-        visible={showToast}
-        message={'Records not found'}
-        onHide={() => setShowToast(false)}
-      />
     </CustomSafeAreaView>
   );
 };

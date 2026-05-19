@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Pressable } from 'react-native';
 import styles from './styles';
-import { scale } from 'react-native-size-matters';
+import { moderateScale, scale } from 'react-native-size-matters';
 
 // Functional component
 const ButtonCircled = ({ height, icon, backgroundColor, onPress, opacity }) => {
@@ -10,9 +10,9 @@ const ButtonCircled = ({ height, icon, backgroundColor, onPress, opacity }) => {
       style={[
         styles.button,
         {
-          height: scale(height),
+          height: moderateScale(height),
           backgroundColor: backgroundColor,
-          borderRadius: scale(height / 2),
+          borderRadius: moderateScale(height / 2),
           opacity: opacity,
         },
       ]}
